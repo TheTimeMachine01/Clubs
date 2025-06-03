@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Memories",
-    "slug": "Memories",
+    "name": "Clubs",
+    "slug": "Clubs",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "memories",
+    "scheme": "clubs",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
