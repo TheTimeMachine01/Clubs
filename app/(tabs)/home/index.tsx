@@ -6,6 +6,7 @@ import { Button, Card, H3, Input, Paragraph, ScrollView, Stack, Text, XStack, YS
 
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useUserProfile } from '@/hooks/useUserProfile';
 
 // export function CardDemo() {
 //   return (
@@ -70,7 +71,26 @@ export default function HomeScreen(props: CardProps) {
 
   const colorScheme = useColorScheme();
 
-  const username = 'Ashish';
+  const { userProfile, isLoadingProfile, errorProfile } = useUserProfile();
+
+  const getDisplayName = () => {
+    // Prioritize firstName, which should be populated by useUserProfile
+    if (userProfile?.firstName) {
+      return userProfile.firstName;
+    }
+    // Fallback if firstName is unexpectedly missing (e.g., fullName was "John")
+    // or if you want to show the first word of fullName if firstName extraction failed
+    if (userProfile?.fullName) {
+      return userProfile.fullName.split(' ')[0];
+    }
+    // Fallback to email if no name parts available
+    if (userProfile?.email) {
+      return userProfile.email;
+    }
+    // Default if profile is not loaded or completely empty
+    return 'User';
+  };
+
 
   const cardsData = [
     { id: 1, title: 'Card One', description: 'This is the first card.', backgroundColor: 'orange' },
@@ -108,7 +128,7 @@ export default function HomeScreen(props: CardProps) {
         fontWeight={'800'}
         marginTop={'$4'}
       >
-        {username}
+        {getDisplayName()}
       </Text>
 
       <XStack backgroundColor='$background' marginTop={'$5'} marginBottom={'$5'} circular width={'100%'}>

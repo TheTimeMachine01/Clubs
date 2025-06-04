@@ -1,3 +1,4 @@
+import { useAuth } from '@/context/AuthContext';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Appearance, Dimensions, useColorScheme } from 'react-native';
@@ -17,6 +18,15 @@ export default function SettingScreen() {
   }
 
   const buttonSize = '$12'; // Adjust as needed
+
+  const { logout } = useAuth();
+
+  // const handleLogin = () => {
+  //   router.push('/(auth)/login');
+  // };
+  // const handleSignIn = () => {
+  //   router.push('/(auth)/signup');
+  // };
 
   return (
 
@@ -61,7 +71,12 @@ export default function SettingScreen() {
           Current Theme: {colorScheme?.toUpperCase() || 'Unknown'}
         </Text>
 
+        <Stack flex={1} jc='flex-start' ai='center'>
+          <Button onPress={logout}>Logout</Button>
+        </Stack>
+
       </YStack>
+
 
 
 
